@@ -22,3 +22,11 @@ select,
 textarea {
     max-width: 280px;
 }
+
+#main-video {
+    max-width: 100%;
+}
+
+h1 {
+    text-align: right;
+}
