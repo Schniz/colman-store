@@ -29,22 +29,29 @@ namespace StoreForColman.Models
         }
     }
 
+    [DisplayName("מוצר")]
     public class Product
     {
+        [DisplayName("מקט")]
         public int ID { get; set; }
 
+        [DisplayName("שם המוצר")]
         [Required]
         public string Name { get; set; }
 
+        [DisplayName("מחיר בש\"ח")]
         [Required]
         public double PriceInNIS { get; set; }
 
+        [DisplayName("יצרן")]
         [Required]
         public string ManufactorName { get; set; }
 
+        [DisplayName("כמות במלאי")]
         [Required]
         public int AmountInStore { get; set; }
 
+        [DisplayName("האם קיים במלאי")]
         [NotMapped]
         public bool IsAvailable
         {

@@ -46,6 +46,30 @@
                     AmountInStore = 1,
                     ManufactorName = "Pokemon",
                     PriceInNIS = 10.5,
+                },
+                new Models.Product
+                {
+                    ID = 2,
+                    Name = "Garurumon",
+                    AmountInStore = 0,
+                    ManufactorName = "Digimon",
+                    PriceInNIS = 200.5,
+                },
+                new Models.Product
+                {
+                    ID = 3,
+                    Name = "Jigglypuff",
+                    AmountInStore = 0,
+                    ManufactorName = "Pokemon",
+                    PriceInNIS = 40,
+                },
+                new Models.Product
+                {
+                    ID = 4,
+                    Name = "Garurumon Milhamti",
+                    AmountInStore = 5,
+                    ManufactorName = "Digimon",
+                    PriceInNIS = 1.5,
                 }
             );
         }

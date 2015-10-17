@@ -5,7 +5,7 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>@ViewBag.Title - My ASP.NET Application</title>
     @Styles.Render("~/Content/css")
-    @Styles.Render()
+    <link rel="stylesheet" href="//cdn.rawgit.com/morteza/bootstrap-rtl/master/dist/css/bootstrap-rtl.min.css">
     @Scripts.Render("~/bundles/modernizr")
 
 </head>
@@ -23,7 +23,7 @@
             <div class="navbar-collapse collapse">
                 <ul class="nav navbar-nav">
                     <li>@Html.ActionLink("דף הבית", "Index", "Home")</li>
-                    <li>@Html.ActionLink("מוצרים", "Contact", "Home")</li>
+                    <li>@Html.ActionLink("מוצרים", "Products", "Index")</li>
                 </ul>
                 @Html.Partial("_LoginPartial")
             </div>
@@ -36,9 +36,9 @@
             <p>לכבוד המכללה למנהל</p>
         </footer>
     </div>
-
     @Scripts.Render("~/bundles/jquery")
     @Scripts.Render("~/bundles/bootstrap")
+    <script src="~/Content/functional.js"></script>
     @RenderSection("scripts", required: false)
 </body>
 </html>

@@ -1,0 +1,32 @@
+﻿@model IEnumerable<StoreForColman.Models.Product>
+
+@{
+    ViewBag.Title = "מוצרים";
+}
+
+<table class="table" id="products-index">
+    <tr class="table-head">
+        <th>
+            @Html.DisplayNameFor(model => model.ID)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.Name)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.ManufactorName)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.PriceInNIS)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.AmountInStore)
+        </th>
+        <th></th>
+    </tr>
+</table>
+
+<button id="get-pokemons">Poke</button>
+
+@section Scripts {
+<script src="~/Content/products.index.js"></script>
+}
