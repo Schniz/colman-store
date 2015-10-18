@@ -1,0 +1,26 @@
+﻿
+@{
+    ViewBag.Title = "התחבר";
+}
+
+<h2>התחבר</h2>
+
+@using (Html.BeginForm("Create", "Session", FormMethod.Post))
+{
+    <div class="form-control">
+        <label for="username">
+            שם המשתמש
+        </label>
+        <input type="text" id="username" name="username" placeholder="PlonyAlmony" />
+    </div>
+    <div class="form-control">
+        <label for="pass">
+            סיסמה
+        </label>
+        <input type="password" id="pass" name="pass" placeholder="verYsEcReT!" />
+    </div>
+    <div class="form-control">
+        @ViewBag.ErrorMessage
+        <input type="submit" value="וואלק התחברר" />
+    </div>
+}

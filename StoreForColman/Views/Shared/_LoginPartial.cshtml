@@ -1,22 +1,28 @@
 ﻿@using Microsoft.AspNet.Identity
-@if (Request.IsAuthenticated)
+@using StoreForColman.Models
+@if (Session["user"] != null)
 {
-    using (Html.BeginForm("LogOff", "Account", FormMethod.Post, new { id = "logoutForm", @class = "navbar-right" }))
-    {
-    @Html.AntiForgeryToken()
-
     <ul class="nav navbar-nav navbar-left">
         <li>
-            @Html.ActionLink("שלום לך " + User.Identity.GetUserName() + "!", "Index", "Manage", routeValues: null, htmlAttributes: new { title = "Manage" })
+            <a>
+                שלום לך @((Session["user"] as ApplicationUser).FullName)
+            </a>
         </li>
-        <li><a href="javascript:document.getElementById('logoutForm').submit()">Log off</a></li>
+        <li>
+            @Html.ActionLink("התנתק", "Delete", "Session")
+        </li>
+        @if ((Session["user"] as ApplicationUser).IsAdmin)
+        {
+            <li>
+                @Html.ActionLink("מסך ניהול", "Index", "Admin")
+            </li>
+        }
     </ul>
-    }
 }
 else
 {
     <ul class="nav navbar-nav navbar-left">
-        <li>@Html.ActionLink("הרשם", "Register", "Account", routeValues: null, htmlAttributes: new { id = "registerLink" })</li>
-        <li>@Html.ActionLink("התחבר", "Login", "Account", routeValues: null, htmlAttributes: new { id = "loginLink" })</li>
+        <li>@Html.ActionLink("הרשם", "Create", "User", routeValues: null, htmlAttributes: new { id = "registerLink" })</li>
+        <li>@Html.ActionLink("התחבר", "Create", "Session", routeValues: null, htmlAttributes: new { id = "loginLink" })</li>
     </ul>
 }

@@ -38,6 +38,9 @@
     </div>
     @Scripts.Render("~/bundles/jquery")
     @Scripts.Render("~/bundles/bootstrap")
+    <script>
+        window.isLoggedIn = @(Session["user"] != null ? "true" : "false");
+    </script>
     <script src="~/Content/functional.js"></script>
     @RenderSection("scripts", required: false)
 </body>
