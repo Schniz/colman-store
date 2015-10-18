@@ -40,7 +40,14 @@ function getFilter() {
     };
 }
 
-var loadPage = compose(refreshTable, generateRows, memoize(fetchData), getFilter);
+// Loading a page is just a composition of all the functions
+// below
+var loadPage = compose(
+    refreshTable,
+    generateRows,
+    memoize(fetchData),
+    getFilter
+);
 
 $(loadPage);
 $("#manufactors-filter").change(loadPage);
