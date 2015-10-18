@@ -3,6 +3,7 @@ using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Web;
+using System.Web.Helpers;
 using System.Web.Mvc;
 
 namespace StoreForColman.Views
@@ -27,8 +28,10 @@ namespace StoreForColman.Views
             {
                 String username = Request.Form["username"];
                 String pass = Request.Form["pass"];
-                // TODO: Add insert logic here
-                ApplicationUser appUser = db.Users.First(user => user.UserName.Equals(username) && user.PasswordHash.Equals(pass));
+                ApplicationUser appUser = db.Users.First(user => (
+                    user.UserName.Equals(username) &&
+                    user.PasswordHash.Equals(pass)
+                ));
                 Session["user"] = appUser;
                 return RedirectToAction("Index", "Home");
             }
@@ -37,6 +40,12 @@ namespace StoreForColman.Views
                 Session["ErrorMessage"] = "שם המשתמש או הסיסמה לא נכונים";
                 return RedirectToAction("Create");
             }
+        }
+
+        public ActionResult Delete()
+        {
+            Session["user"] = null;
+            return RedirectToAction("Index", "Home");
         }
     }
 }
