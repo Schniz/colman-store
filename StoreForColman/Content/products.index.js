@@ -1,4 +1,6 @@
-﻿function fetchData(filtering) {
+﻿(function () {
+
+function fetchData(filtering) {
     return $.getJSON("/Products/List", filtering);
 }
 
@@ -54,3 +56,4 @@ $("#manufactors-filter").change(loadPage);
 $("#maxprice-filter").keyup(loadPage);
 $("#available-filter").change(loadPage);
 
+})();
