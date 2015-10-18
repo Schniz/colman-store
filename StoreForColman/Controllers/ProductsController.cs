@@ -17,6 +17,7 @@ namespace StoreForColman.Controllers
         // GET: Products
         public ActionResult Index()
         {
+            ViewBag.manufactors = db.Products.Select(product => product.ManufactorName.ToLower()).Distinct().ToList();
             return View(db.Products.ToList());
         }
         

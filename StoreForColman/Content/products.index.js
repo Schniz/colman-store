@@ -19,10 +19,31 @@ function refreshTable(rows) {
     $("#products-index").append(rows);
 }
 
-var loadPage = compose(refreshTable, generateRows, fetchData);
+function getManufactorFilter() {
+    var $element = $("#manufactors-filter option:selected");
+    return $element.attr("data-is-all") ? undefined : $element.val();
+}
 
-$("#get-pokemons").click(function () {
-    loadPage({ manufactor: 'pokemon' });
-});
+function getMaxPrice() {
+    return $("#maxprice-filter").val() || undefined;
+}
 
-$(function () { loadPage() });
+function getAvailableFilter() {
+    return $("#available-filter").is(':checked') || undefined;
+}
+
+function getFilter() {
+    return {
+        manufactor: getManufactorFilter(),
+        maxPrice: getMaxPrice(),
+        available: getAvailableFilter()
+    };
+}
+
+var loadPage = compose(refreshTable, generateRows, memoize(fetchData), getFilter);
+
+$(loadPage);
+$("#manufactors-filter").change(loadPage);
+$("#maxprice-filter").keyup(loadPage);
+$("#available-filter").change(loadPage);
+
