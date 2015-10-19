@@ -21,7 +21,7 @@ namespace StoreForColman.Controllers
                 return Session["currentOrder"] as Dictionary<int, int>;
             }
         }
-
+        
         // GET: Order
         public ActionResult Index()
         {
@@ -30,16 +30,17 @@ namespace StoreForColman.Controllers
 
         public ActionResult Cart()
         {
-            var productsFromOrder = from p in db.Products
-                           where CurrentOrder.Keys.Contains(p.ID)
-                           select p;
-            var response = productsFromOrder.Select(product => new {
-                ID = product.ID,
-                Quantity = CurrentOrder[product.ID],
-                Name = product.Name,
-                ManufactorName = product.ManufactorName 
-            });
-            return Json(response, JsonRequestBehavior.AllowGet);
+            int[] keys = CurrentOrder.Select(e => e.Key).ToArray();
+            var productsFromOrder = from key in keys
+                                    join product in db.Products on key equals product.ID
+                                    select new
+                                    {
+                                        ID = product.ID,
+                                        Quantity = CurrentOrder[product.ID],
+                                        Name = product.Name,
+                                        ManufactorName = product.ManufactorName
+                                    };
+            return Json(productsFromOrder.ToList(), JsonRequestBehavior.AllowGet);
         }
         
         [HttpPost]
@@ -55,7 +56,7 @@ namespace StoreForColman.Controllers
                 {
                     CurrentOrder[id] = CurrentOrder[id] + 1;
                 }
-                return Json(new { item = "Added." });
+                return RedirectToAction("Cart");
             }
             catch
             {

@@ -15,10 +15,40 @@ namespace StoreForColman.Models
     {
         [DefaultValue(false)]
         [Required]
+        [DisplayName("האם מנהל")]
         public bool IsAdmin { get; set; }
 
+        [DisplayName("שם מלא")]
         [Required]
         public string FullName { get; set; }
+
+        [DisplayName("סיסמה")]
+        public override string PasswordHash
+        {
+            get
+            {
+                return base.PasswordHash;
+            }
+
+            set
+            {
+                base.PasswordHash = value;
+            }
+        }
+
+        [DisplayName("שם משתמש")]
+        public override string UserName
+        {
+            get
+            {
+                return base.UserName;
+            }
+
+            set
+            {
+                base.UserName = value;
+            }
+        }
 
         public async Task<ClaimsIdentity> GenerateUserIdentityAsync(UserManager<ApplicationUser> manager)
         {

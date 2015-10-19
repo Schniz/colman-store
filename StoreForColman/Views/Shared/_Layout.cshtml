@@ -25,6 +25,13 @@
                     <li>@Html.ActionLink("דף הבית", "Index", "Home")</li>
                     <li>@Html.ActionLink("מוצרים", "Index", "Products")</li>
                 </ul>
+                <ul class="nav navbar-nav navbar-left">
+                    <li>
+                        <a href="#">
+                            <span id="cart-items-number">0</span> פריטים בסל
+                        </a>
+                    </li>
+                </ul>
                 @Html.Partial("_LoginPartial")
             </div>
         </div>
@@ -42,6 +49,7 @@
         window.isLoggedIn = @(Session["user"] != null ? "true" : "false");
     </script>
     <script src="~/Content/functional.js"></script>
+    <script src="~/Content/cart.js"></script>
     @RenderSection("scripts", required: false)
 </body>
 </html>
