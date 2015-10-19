@@ -13,14 +13,20 @@
         }, "").trim();
     }
 
-    function refreshCart(cartData) {
+    function updateItemsNumber(cartData) {
         var itemsCount = cartData.reduce(function (sum, item) {
             return sum + item.Quantity;
         }, 0);
         $("#cart-items-number").text(itemsCount);
-        $("#cart-items-link").attr("title", cartDataToString(cartData)).tooltip('fixTitle');
-        console.log(cartDataToString(cartData));
+        return cartData;
     }
+
+    function updateLinkTooltip(cartData) {
+        $("#cart-items-link").attr("title", cartDataToString(cartData)).tooltip('fixTitle');
+        return cartData;
+    }
+
+    var refreshCart = compose(updateLinkTooltip, updateItemsNumber);
 
     function createTooltip() {
         $("#cart-items-link").tooltip({

@@ -4,9 +4,12 @@
         return $.getJSON("/Products/List", filtering);
     }
 
-    function generateAddToCartButton(rowData) {
-        return $("<td />").append(
-            $("<a />").text("הוסף לסל הקניות").click(window.addToCart.bind(null, rowData.ID))
+    function generateAddToCartButton(id) {
+        return $("<a />").text("הוסף לסל הקניות").attr(
+            "href",
+            "javascript:void(0);"
+        ).click(
+            window.addToCart.bind(null, id)
         );
     }
 
@@ -18,13 +21,7 @@
                 $("<td />").text(rowData.ManufactorName),
                 $("<td />").text(rowData.PriceInNIS),
                 $("<td />").text(rowData.AmountInStore),
-                $("<td />").append(
-                    $("<a />").text("הוסף לסל הקניות")
-                        .attr("href", "javascript:void(0);")
-                        .click(
-                            window.addToCart.bind(null, rowData.ID)
-                        )
-                )
+                $("<td />").append(generateAddToCartButton(rowData.ID))
             ]);
         });
     }
