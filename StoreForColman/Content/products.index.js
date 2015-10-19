@@ -18,9 +18,13 @@
                 $("<td />").text(rowData.ManufactorName),
                 $("<td />").text(rowData.PriceInNIS),
                 $("<td />").text(rowData.AmountInStore),
-                window.isLoggedIn ? (
-                    generateAddToCartButton(rowData)
-                ) : $("<td />")
+                $("<td />").append(
+                    $("<a />").text("הוסף לסל הקניות")
+                        .attr("href", "javascript:void(0);")
+                        .click(
+                            window.addToCart.bind(null, rowData.ID)
+                        )
+                )
             ]);
         });
     }
