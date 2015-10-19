@@ -66,7 +66,7 @@
 
     $(loadPage);
     $("#manufactors-filter").change(loadPage);
-    $("#maxprice-filter").keyup(loadPage);
+    $("#maxprice-filter").keyup(loadPage).change(loadPage);
     $("#available-filter").change(loadPage);
 
 })();
