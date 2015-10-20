@@ -1,27 +1,27 @@
 ﻿(function () {
+    var DOM = window.DOM;
 
     function fetchData(filtering) {
         return $.getJSON("/Products/List", filtering);
     }
 
     function generateAddToCartButton(id) {
-        return $("<a />").text("הוסף לסל הקניות").attr(
-            "href",
-            "javascript:void(0);"
-        ).click(
+        return DOM.a({
+            href: 'javascript: void(0);'
+        }, "הוסף לסל הקניות").click(
             window.addToCart.bind(null, id)
         );
     }
 
     function generateRows(data) {
         return data.map(function (rowData) {
-            return $("<tr />").append([
-                $("<td />").text(rowData.ID),
-                $("<td />").text(rowData.Name),
-                $("<td />").text(rowData.ManufactorName),
-                $("<td />").text(rowData.PriceInNIS),
-                $("<td />").text(rowData.AmountInStore),
-                $("<td />").append(generateAddToCartButton(rowData.ID))
+            return DOM.tr([
+                DOM.td(rowData.ID),
+                DOM.td(rowData.Name),
+                DOM.td(rowData.ManufactorName),
+                DOM.td(rowData.PriceInNIS),
+                DOM.td(rowData.AmountInStore),
+                DOM.td(generateAddToCartButton(rowData.ID))
             ]);
         });
     }

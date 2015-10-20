@@ -1,16 +1,50 @@
 ﻿(function () {
-    var td = DOM.td;
-    var tr = DOM.tr;
-    var input = DOM.input;
-    var a = DOM.a;
-    var span = DOM.span;
+    var DOM = window.DOM;
     
-    var blankRow = tr(
-        td({ colspan: 5 }, [
+    var blankRow = DOM.tr(
+        DOM.td({ colspan: 5 }, [
             "אין מוצרים ברשימה. ",
-            a({ href: "/Products" }, "צא למסע קניות!")
+            DOM.a({ href: "/Products" }, "צא למסע קניות!")
         ])
     );
+
+    function removeItemButton(id) {
+        return DOM.a({
+            href: "javascript: void(0)",
+            class: 'input-group-addon'
+        }, DOM.span({
+            class: 'glyphicon glyphicon-trash'
+        })).click(removeItemFromCart.bind(null, id));
+    }
+
+    function sumRow(cartData) {
+        var sum = cartData.reduce(function (sum, item) {
+            return sum + item.PriceInNIS * item.Quantity;
+        }, 0);
+        return DOM.tr([
+            DOM.td(),
+            DOM.td(),
+            DOM.td(),
+            DOM.td(),
+            DOM.td('סה"כ: ' + sum + ' ש"ח')
+        ]);
+    }
+
+    function getQuantityInForm(id) {
+        var val = Math.floor(parseInt($("[data-item-id=" + id + "]").val()));
+        if (isNaN(val)) throw Error("not gute");
+        return { id: id, quantity: val };
+    }
+
+    function quantityInput(item) {
+        var onChange = changedQuantity.bind(null, item.ID);
+        return DOM.input({
+            class: 'form-control',
+            type: 'number',
+            min: 0,
+            'data-item-id': item.ID
+        }, item.Quantity).change(onChange);
+    }
 
     function generateRows(cartData) {
         return !cartData.length ? blankRow : cartData.map(function (item) {
@@ -21,14 +55,18 @@
                 DOM.td(item.PriceInNIS),
                 DOM.td(
                     DOM.div({ class: 'input-group'}, [
-                        DOM.input({ class: 'form-control', type: 'number', min: 0 }, item.Quantity),
-                        a({ href: "javascript: void(0)", class: 'input-group-addon' }, [
-                            span({ class: 'glyphicon glyphicon-trash'})
-                        ]).click(removeItemFromCart.bind(null, item.ID))
+                        quantityInput(item),
+                        removeItemButton(item.ID)
                     ])
                 ).css({ width: '11em' })
             ]);
-        });
+        }).concat(sumRow(cartData));
+    }
+
+    function toggleLoad(x) {
+        $("#order-index tr:not(.table-head)").hide();
+        $("#products-loading").show();
+        return x;
     }
 
     function refreshTable(rows) {
@@ -37,8 +75,9 @@
         $("#products-loading").hide();
     }
 
-    var removeItemFromCart = compose(refreshTable, generateRows, window.removeFromCart);
-    var loadPage = compose(refreshTable, trace('rows'), generateRows, window.fetchCartData);
+    var removeItemFromCart = compose(refreshTable, generateRows, window.removeFromCart, toggleLoad);
+    var changedQuantity = compose(refreshTable, generateRows, window.editFromCart, trace('quantity is'), getQuantityInForm, toggleLoad);
+    var loadPage = compose(refreshTable, trace('rows'), generateRows, window.fetchCartData, toggleLoad);
 
     $(loadPage);
 })();

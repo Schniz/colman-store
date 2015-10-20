@@ -7,6 +7,10 @@
         return $.post("/Order/Delete/" + id);
     };
 
+    window.sendEditItemInCart = function sendEditItemInCart(options) {
+        return $.post("/Order/Edit/" + options.id, { quantity: options.quantity });
+    };
+
     window.fetchCartData = function fetchCartData() {
         return $.getJSON("/Order/Cart");
     };
@@ -42,6 +46,6 @@
 
     window.addToCart = compose(refreshCart, sendAddToCart);
     window.removeFromCart = compose(refreshCart, sendRemoveFromCart);
-
+    window.editFromCart = compose(refreshCart, sendEditItemInCart);
     $(compose(refreshCart, fetchCartData, createTooltip));
 })();

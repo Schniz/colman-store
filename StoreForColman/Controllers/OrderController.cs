@@ -96,5 +96,35 @@ namespace StoreForColman.Controllers
                 return Json(new { error = "An Error Occured." });
             }
         }
+
+        [HttpPost]
+        public ActionResult Create()
+        {
+            try
+            {
+                return Json(new { success = "yes" });
+            }
+            catch
+            {
+                return Json(new { error = "An Error Occured." });
+            }
+        }
+
+        [HttpPost]
+        public ActionResult Edit(int id, FormCollection form)
+        {
+            try
+            {
+                int quantity = int.Parse(form["Quantity"]);
+                if (quantity < 0) throw new Exception();
+                Product product = db.Products.First(p => p.ID == id);
+                CurrentOrder[id] = quantity;
+                return RedirectToAction("Cart");
+            }
+            catch
+            {
+                return Json(new { error = "An Error Occured." });
+            }
+        }
     }
 }
