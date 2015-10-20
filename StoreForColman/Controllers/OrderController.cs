@@ -110,13 +110,12 @@ namespace StoreForColman.Controllers
                                    Product = p1,
                                    Quantity = product.Quantity,
                                };
-                if (products.Count() < 1) throw new Exception("Please order a product");
+                if (products.Count() < 1) throw new Exception("אנא בחר מוצר כלשהו");
                 String userId = (Session["user"] as ApplicationUser).Id;
                 var userQuery = from u in db.Users
                                        where u.Id == userId
                                        select u;
                 ApplicationUser user = userQuery.First();
-                //db.OrderedProduct.AddRange(products);
                 db.Orders.Add(new Order
                 {
                     CreatedAt = DateTime.Now,
