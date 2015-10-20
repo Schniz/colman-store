@@ -190,6 +190,26 @@
     <Compile Include="Migrations\201510020734379_AddFullNameColumnToUsers.Designer.cs">
       <DependentUpon>201510020734379_AddFullNameColumnToUsers.cs</DependentUpon>
     </Compile>
+    <Compile Include="Migrations\201510202042258_AddedOrders.cs" />
+    <Compile Include="Migrations\201510202042258_AddedOrders.Designer.cs">
+      <DependentUpon>201510202042258_AddedOrders.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Migrations\201510202045333_AddedOrderModel.cs" />
+    <Compile Include="Migrations\201510202045333_AddedOrderModel.Designer.cs">
+      <DependentUpon>201510202045333_AddedOrderModel.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Migrations\201510202047329_AddedOrderedProductModel.cs" />
+    <Compile Include="Migrations\201510202047329_AddedOrderedProductModel.Designer.cs">
+      <DependentUpon>201510202047329_AddedOrderedProductModel.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Migrations\201510202049094_AddedRelationshipsToOrderModel.cs" />
+    <Compile Include="Migrations\201510202049094_AddedRelationshipsToOrderModel.Designer.cs">
+      <DependentUpon>201510202049094_AddedRelationshipsToOrderModel.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Migrations\201510202107271_ChangePriceToDoubleInOrderedProduct.cs" />
+    <Compile Include="Migrations\201510202107271_ChangePriceToDoubleInOrderedProduct.Designer.cs">
+      <DependentUpon>201510202107271_ChangePriceToDoubleInOrderedProduct.cs</DependentUpon>
+    </Compile>
     <Compile Include="Migrations\Configuration.cs" />
     <Compile Include="Models\IdentityModels.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
@@ -283,6 +303,21 @@
     </EmbeddedResource>
     <EmbeddedResource Include="Migrations\201510020734379_AddFullNameColumnToUsers.resx">
       <DependentUpon>201510020734379_AddFullNameColumnToUsers.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Migrations\201510202042258_AddedOrders.resx">
+      <DependentUpon>201510202042258_AddedOrders.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Migrations\201510202045333_AddedOrderModel.resx">
+      <DependentUpon>201510202045333_AddedOrderModel.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Migrations\201510202047329_AddedOrderedProductModel.resx">
+      <DependentUpon>201510202047329_AddedOrderedProductModel.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Migrations\201510202049094_AddedRelationshipsToOrderModel.resx">
+      <DependentUpon>201510202049094_AddedRelationshipsToOrderModel.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Migrations\201510202107271_ChangePriceToDoubleInOrderedProduct.resx">
+      <DependentUpon>201510202107271_ChangePriceToDoubleInOrderedProduct.cs</DependentUpon>
     </EmbeddedResource>
   </ItemGroup>
   <PropertyGroup>

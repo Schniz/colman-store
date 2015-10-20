@@ -75,9 +75,34 @@
         $("#products-loading").hide();
     }
 
+    function sendCreateOrder() {
+        return $.post("/Order/Create");
+    }
+
+    function afterSave(result) {
+        if (result.error) throw Error(result.error);
+        return result;
+    }
+
+    function showSuccessMessage(result) {
+        $.bootstrapGrowl("הצלחנו! זה נשלח בהצלחה", {
+            ele: 'body', // which element to append to
+            type: 'success', // (null, 'info', 'danger', 'success')
+            offset: { from: 'bottom', amount: 20 }, // 'top', or 'bottom'
+            align: 'right', // ('left', 'right', or 'center')
+            width: 250, // (integer, or 'auto')
+            delay: 4000, // Time while the message will be displayed. It's not equivalent to the *demo* timeOut!
+            allow_dismiss: true, // If true then will display a cross to close the popup.
+            stackup_spacing: 10 // spacing between consecutively stacked growls.
+        });
+
+        return result;
+    }
+
     var removeItemFromCart = compose(refreshTable, generateRows, window.removeFromCart, toggleLoad);
     var changedQuantity = compose(refreshTable, generateRows, window.editFromCart, trace('quantity is'), getQuantityInForm, toggleLoad);
-    var loadPage = compose(refreshTable, trace('rows'), generateRows, window.fetchCartData, toggleLoad);
+    var loadPage = compose(refreshTable, trace('rows'), generateRows, window.fetchAndRefreshCart, toggleLoad);
+    var createOrder = window.createOrder = compose(loadPage, trace('after save'), showSuccessMessage, afterSave, sendCreateOrder);
 
     $(loadPage);
 })();

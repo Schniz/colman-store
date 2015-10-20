@@ -1,4 +1,6 @@
 ﻿(function () {
+    var Cart = window.Cart = {};
+
     window.sendAddToCart = function sendAddToCart(id) {
         return $.post("/Order/Add/" + id);
     };
@@ -47,5 +49,6 @@
     window.addToCart = compose(refreshCart, sendAddToCart);
     window.removeFromCart = compose(refreshCart, sendRemoveFromCart);
     window.editFromCart = compose(refreshCart, sendEditItemInCart);
+    window.fetchAndRefreshCart = compose(refreshCart, fetchCartData);
     $(compose(refreshCart, fetchCartData, createTooltip));
 })();

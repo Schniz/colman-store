@@ -7,6 +7,8 @@ using System.ComponentModel;
 using System.ComponentModel.DataAnnotations;
 using System.ComponentModel.DataAnnotations.Schema;
 using StoreForColman.Helpers;
+using System.Collections.Generic;
+using System;
 
 namespace StoreForColman.Models
 {
@@ -57,6 +59,22 @@ namespace StoreForColman.Models
             // Add custom user claims here
             return userIdentity;
         }
+    }
+
+    public class Order
+    {
+        public int ID { get; set; }
+        public ApplicationUser User { get; set; }
+        public ICollection<OrderedProduct> Products { get; set; }
+        public DateTime CreatedAt { get; set; }
+    }
+
+    public class OrderedProduct
+    {
+        public int ID { get; set; }
+        public Product Product { get; set; }
+        public int Quantity { get; set; }
+        public double CurrentPriceInNIS { get; set; }
     }
 
     [DisplayName("מוצר")]
@@ -112,6 +130,8 @@ namespace StoreForColman.Models
     public class ApplicationDbContext : IdentityDbContext<ApplicationUser>
     {
         public DbSet<Product> Products { get; set; }
+        public DbSet<Order> Orders { get; set; }
+        public DbSet<OrderedProduct> OrderedProduct { get; set; }
 
         public ApplicationDbContext()
             : base("DefaultConnection", throwIfV1Schema: false)

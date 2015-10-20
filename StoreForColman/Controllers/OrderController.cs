@@ -102,11 +102,34 @@ namespace StoreForColman.Controllers
         {
             try
             {
+                var products = from product in ProductsInCurrentOrder
+                               join p1 in db.Products on product.ID equals p1.ID
+                               select new OrderedProduct
+                               {
+                                   CurrentPriceInNIS = product.PriceInNIS,
+                                   Product = p1,
+                                   Quantity = product.Quantity,
+                               };
+                if (products.Count() < 1) throw new Exception("Please order a product");
+                String userId = (Session["user"] as ApplicationUser).Id;
+                var userQuery = from u in db.Users
+                                       where u.Id == userId
+                                       select u;
+                ApplicationUser user = userQuery.First();
+                //db.OrderedProduct.AddRange(products);
+                db.Orders.Add(new Order
+                {
+                    CreatedAt = DateTime.Now,
+                    User = user,
+                    Products = products.ToList()
+                });
+                db.SaveChanges();
+                CurrentOrder.Clear();
                 return Json(new { success = "yes" });
             }
-            catch
+            catch (Exception e)
             {
-                return Json(new { error = "An Error Occured." });
+                return Json(new { error = e.Message });
             }
         }
 
