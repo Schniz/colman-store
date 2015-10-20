@@ -1,0 +1,45 @@
+﻿
+@{
+    ViewBag.Title = "Index";
+}
+
+<h2>פרטי הזמנה</h2>
+
+<table id="order-index" class="table table-hover table-striped">
+    <tr class="table-head">
+        <td>מק"ט</td>
+        <td>שם מוצר</td>
+        <td>יצרן</td>
+        <td>מחיר</td>
+        <td>כמות</td>
+    </tr>
+    <tr class="table-head" id="products-loading">
+        <td colspan="5">
+            טוען נתונים..
+        </td>
+    </tr>
+</table>
+
+@if (Session["user"] == null)
+{
+    <div class="alert alert-warning">
+        כדי לשמור את ההזמנה עליך
+        @Html.ActionLink("להתחבר", "Create", "Session")
+    </div>
+}
+else if (ViewBag.ItemCount < 1)
+{
+    <div class="alert alert-warning">
+        אין לך שום דבר בהזמנה. כדי לשמור אותה,
+        @Html.ActionLink("צא למסע קניות", "Index", "Products")
+    </div>
+}
+else
+{
+    <button id="order-index-save-order">שמור הזמנה!</button>
+}
+
+@section Scripts {
+    <script src="~/Content/order.index.js"></script>
+}
+

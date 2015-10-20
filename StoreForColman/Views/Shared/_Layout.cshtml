@@ -5,7 +5,10 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>@ViewBag.Title - החנות</title>
     @Styles.Render("~/Content/css")
+    <!--    
     <link rel="stylesheet" href="//cdn.rawgit.com/morteza/bootstrap-rtl/master/dist/css/bootstrap-rtl.min.css">
+    -->
+    <link rel="stylesheet" href="~/Content/bootstrap-hebrew.css" />
     @Scripts.Render("~/bundles/modernizr")
 
 </head>
@@ -27,7 +30,8 @@
                 </ul>
                 <ul class="nav navbar-nav navbar-left">
                     <li>
-                        <a href="#" id="cart-items-link">
+                        <a href="/Order" id="cart-items-link">
+                            <span class="glyphicon cart-icon glyphicon-shopping-cart"></span>
                             <span id="cart-items-number">0</span> פריטים בסל
                         </a>
                     </li>

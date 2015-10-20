@@ -81,13 +81,12 @@ namespace StoreForColman.Models
         [Required]
         public int AmountInStore { get; set; }
 
-        [DisplayName("האם קיים במלאי")]
         [NotMapped]
         public bool IsAvailable
         {
             get
             {
-                return this.AmountInStore > 0;
+                return AmountInStore > 0;
             }
         }
 

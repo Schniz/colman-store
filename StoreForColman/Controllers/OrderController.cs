@@ -21,26 +21,43 @@ namespace StoreForColman.Controllers
                 return Session["currentOrder"] as Dictionary<int, int>;
             }
         }
+
+        private IEnumerable<dynamic> ProductsInCurrentOrder
+        {
+            get
+            {
+                int[] keys = CurrentOrder.Select(e => e.Key).ToArray();
+                return from key in keys
+                       join product in db.Products on key equals product.ID
+                       select new
+                       {
+                           ID = product.ID,
+                           Quantity = CurrentOrder[product.ID],
+                           Name = product.Name,
+                           PriceInNIS = product.PriceInNIS,
+                           ManufactorName = product.ManufactorName
+                       };
+            }
+        }
+
+        private int ItemCount
+        {
+            get
+            {
+                return CurrentOrder.Values.Count();
+            }
+        }
         
         // GET: Order
         public ActionResult Index()
         {
+            ViewBag.ItemCount = ItemCount;
             return View();
         }
 
         public ActionResult Cart()
         {
-            int[] keys = CurrentOrder.Select(e => e.Key).ToArray();
-            var productsFromOrder = from key in keys
-                                    join product in db.Products on key equals product.ID
-                                    select new
-                                    {
-                                        ID = product.ID,
-                                        Quantity = CurrentOrder[product.ID],
-                                        Name = product.Name,
-                                        ManufactorName = product.ManufactorName
-                                    };
-            return Json(productsFromOrder.ToList(), JsonRequestBehavior.AllowGet);
+            return Json(ProductsInCurrentOrder.ToList(), JsonRequestBehavior.AllowGet);
         }
         
         [HttpPost]
@@ -52,10 +69,26 @@ namespace StoreForColman.Controllers
                 if (!CurrentOrder.ContainsKey(id))
                 {
                     CurrentOrder[id] = 1;
-                } else
+                }
+                else
                 {
                     CurrentOrder[id] = CurrentOrder[id] + 1;
                 }
+                return RedirectToAction("Cart");
+            }
+            catch
+            {
+                return Json(new { error = "An Error Occured." });
+            }
+        }
+
+        [HttpPost]
+        public ActionResult Delete(int id)
+        {
+            try
+            {
+                Product product = db.Products.First(p => p.ID == id);
+                CurrentOrder.Remove(id);
                 return RedirectToAction("Cart");
             }
             catch

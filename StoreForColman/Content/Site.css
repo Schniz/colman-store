@@ -23,6 +23,10 @@ textarea {
     max-width: 280px;
 }
 
+.cart-icon {
+    vertical-align: text-top;   
+}
+
 #main-video {
     max-width: 100%;
 }

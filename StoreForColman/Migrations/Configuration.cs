@@ -43,33 +43,33 @@
                 new Models.Product
                 {
                     ID = 1,
-                    Name = "Pikachu",
+                    Name = "פיקאצ'ו",
                     AmountInStore = 1,
-                    ManufactorName = "Pokemon",
+                    ManufactorName = "פוקימון",
                     PriceInNIS = 10.5,
                 },
                 new Models.Product
                 {
                     ID = 2,
-                    Name = "Garurumon",
+                    Name = "גרורומון",
                     AmountInStore = 0,
-                    ManufactorName = "Digimon",
+                    ManufactorName = "דיג'ימון",
                     PriceInNIS = 200.5,
                 },
                 new Models.Product
                 {
                     ID = 3,
-                    Name = "Jigglypuff",
+                    Name = "ג'יגליפאף",
                     AmountInStore = 0,
-                    ManufactorName = "Pokemon",
+                    ManufactorName = "פוקימון",
                     PriceInNIS = 40,
                 },
                 new Models.Product
                 {
                     ID = 4,
-                    Name = "Garurumon Milhamti",
+                    Name = "גרורומון מלחמתי",
                     AmountInStore = 5,
-                    ManufactorName = "Digimon",
+                    ManufactorName = "דיג'ימון",
                     PriceInNIS = 1.5,
                 }
             );
