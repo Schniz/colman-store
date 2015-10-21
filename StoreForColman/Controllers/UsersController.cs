@@ -26,17 +26,20 @@ namespace StoreForColman.Controllers
         // more details see http://go.microsoft.com/fwlink/?LinkId=317598.
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public ActionResult Create([Bind(Include = "Id,FullName,Email,EmailConfirmed,PasswordHash,SecurityStamp,PhoneNumber,PhoneNumberConfirmed,TwoFactorEnabled,LockoutEndDateUtc,LockoutEnabled,AccessFailedCount,UserName")] ApplicationUser applicationUser)
+        public ActionResult Create([Bind(Include = "FullName,PasswordHash,UserName")] ApplicationUser applicationUser)
         {
-            applicationUser.IsAdmin = false;
-            if (ModelState.IsValid)
+            applicationUser.HashPassword().IsAdmin = false;
+            try
             {
                 db.Users.Add(applicationUser);
                 db.SaveChanges();
-                return RedirectToAction("Index");
+                Session["CreationSucceed"] = true;
+                return RedirectToAction("Success");
             }
-
-            return RedirectToAction("Success");
+            catch
+            {
+                return RedirectToAction("Create");
+            }
         }
 
         public ActionResult Success()
@@ -45,6 +48,8 @@ namespace StoreForColman.Controllers
             {
                 return RedirectToAction("Create");
             }
+
+            Session["CreationSucceed"] = false;
             return View();
         }
 

@@ -1,0 +1,56 @@
+﻿@model StoreForColman.Models.Product
+
+@{
+    ViewBag.Title = "מחק מוצר";
+}
+
+<h2>מחיקה</h2>
+
+<h3>האם אתה בטוח שברצונך למחוק את זה?</h3>
+<div>
+    <h4>מוצר</h4>
+    <hr />
+    <dl class="dl-horizontal">
+        <dt>
+            @Html.DisplayNameFor(model => model.Name)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.Name)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.PriceInNIS)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.PriceInNIS)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.ManufactorName)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.ManufactorName)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.AmountInStore)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.AmountInStore)
+        </dd>
+
+    </dl>
+
+    @using (Html.BeginForm()) {
+        @Html.AntiForgeryToken()
+
+        <div class="form-actions no-color">
+            <input type="submit" value="מחק!" class="btn btn-danger" /> |
+            @Html.ActionLink("חזור לרשימה", "Index")
+        </div>
+    }
+</div>

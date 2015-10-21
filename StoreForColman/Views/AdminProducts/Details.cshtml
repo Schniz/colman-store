@@ -1,0 +1,50 @@
+﻿@model StoreForColman.Models.Product
+
+@{
+    ViewBag.Title = "פרטי מוצר";
+}
+
+<h2>פרטי מוצר</h2>
+
+<div>
+    <h4>מוצר</h4>
+    <hr />
+    <dl class="dl-horizontal">
+        <dt>
+            @Html.DisplayNameFor(model => model.Name)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.Name)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.PriceInNIS)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.PriceInNIS)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.ManufactorName)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.ManufactorName)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.AmountInStore)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.AmountInStore)
+        </dd>
+
+    </dl>
+</div>
+<p>
+    @Html.ActionLink("ערוך", "Edit", new { id = Model.ID }) |
+    @Html.ActionLink("חזרה לרשימה", "Index")
+</p>

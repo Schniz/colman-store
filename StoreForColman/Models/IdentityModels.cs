@@ -9,6 +9,7 @@ using System.ComponentModel.DataAnnotations.Schema;
 using StoreForColman.Helpers;
 using System.Collections.Generic;
 using System;
+using System.Web.Helpers;
 
 namespace StoreForColman.Models
 {
@@ -24,6 +25,7 @@ namespace StoreForColman.Models
         [Required]
         public string FullName { get; set; }
 
+        [MinLength(4)]
         [DisplayName("סיסמה")]
         public override string PasswordHash
         {
@@ -38,7 +40,9 @@ namespace StoreForColman.Models
             }
         }
 
+        [MinLength(3)]
         [DisplayName("שם משתמש")]
+        [Index(IsUnique = true)]
         public override string UserName
         {
             get
@@ -48,8 +52,14 @@ namespace StoreForColman.Models
 
             set
             {
-                base.UserName = value;
+                base.UserName = String.IsNullOrEmpty(value) ? null : value.Trim().ToLower();
             }
+        }
+
+        public ApplicationUser HashPassword()
+        {
+            this.PasswordHash = Crypto.HashPassword(this.PasswordHash);
+            return this;
         }
 
         public async Task<ClaimsIdentity> GenerateUserIdentityAsync(UserManager<ApplicationUser> manager)

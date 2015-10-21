@@ -32,7 +32,7 @@
                 new Models.ApplicationUser
                 {
                     UserName = "admin",
-                    PasswordHash = "admin",
+                    PasswordHash = Crypto.HashPassword("admin"),
                     FullName = "המלך התותח",
                     IsAdmin = true,
                     Id = "1",

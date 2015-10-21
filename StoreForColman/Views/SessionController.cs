@@ -19,7 +19,7 @@ namespace StoreForColman.Views
             Session["ErrorMessage"] = null;
             return View();
         }
-
+            
         // POST: Session/Create
         [HttpPost]
         public ActionResult Create(FormCollection collection)
@@ -28,10 +28,11 @@ namespace StoreForColman.Views
             {
                 String username = Request.Form["username"];
                 String pass = Request.Form["pass"];
+                List<string> userAndPasswords = db.Users.Select(u => u.UserName + "_" + u.PasswordHash).ToList();
                 ApplicationUser appUser = db.Users.First(user => (
-                    user.UserName.Equals(username) &&
-                    user.PasswordHash.Equals(pass)
+                    user.UserName.Equals(username)
                 ));
+                if (!Crypto.VerifyHashedPassword(appUser.PasswordHash, pass)) throw new Exception();
                 Session["user"] = appUser;
                 return RedirectToAction("Index", "Home");
             }

@@ -167,10 +167,13 @@
     <Compile Include="App_Start\IdentityConfig.cs" />
     <Compile Include="App_Start\RouteConfig.cs" />
     <Compile Include="App_Start\Startup.Auth.cs" />
+    <Compile Include="Controllers\AdminController.cs" />
     <Compile Include="Controllers\HomeController.cs" />
     <Compile Include="Controllers\OrderController.cs" />
+    <Compile Include="Controllers\AdminProductsController.cs" />
     <Compile Include="Controllers\ProductsController.cs" />
     <Compile Include="Controllers\UsersController.cs" />
+    <Compile Include="Filters\AdminFilter.cs" />
     <Compile Include="Global.asax.cs">
       <DependentUpon>Global.asax</DependentUpon>
     </Compile>
@@ -209,6 +212,14 @@
     <Compile Include="Migrations\201510202107271_ChangePriceToDoubleInOrderedProduct.cs" />
     <Compile Include="Migrations\201510202107271_ChangePriceToDoubleInOrderedProduct.Designer.cs">
       <DependentUpon>201510202107271_ChangePriceToDoubleInOrderedProduct.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Migrations\201510211151202_AddedUniqueConstraintOnUserName.cs" />
+    <Compile Include="Migrations\201510211151202_AddedUniqueConstraintOnUserName.Designer.cs">
+      <DependentUpon>201510211151202_AddedUniqueConstraintOnUserName.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Migrations\201510211159196_AddedMinLengthToUserNameAndPassword.cs" />
+    <Compile Include="Migrations\201510211159196_AddedMinLengthToUserNameAndPassword.Designer.cs">
+      <DependentUpon>201510211159196_AddedMinLengthToUserNameAndPassword.cs</DependentUpon>
     </Compile>
     <Compile Include="Migrations\Configuration.cs" />
     <Compile Include="Models\IdentityModels.cs" />
@@ -280,6 +291,12 @@
     <Content Include="Views\Users\Success.cshtml" />
     <Content Include="Views\Session\Create.cshtml" />
     <Content Include="Views\Order\Index.cshtml" />
+    <Content Include="Views\AdminProducts\Create.cshtml" />
+    <Content Include="Views\AdminProducts\Delete.cshtml" />
+    <Content Include="Views\AdminProducts\Details.cshtml" />
+    <Content Include="Views\AdminProducts\Edit.cshtml" />
+    <Content Include="Views\AdminProducts\Index.cshtml" />
+    <Content Include="Views\Admin\Index.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />
@@ -318,6 +335,12 @@
     </EmbeddedResource>
     <EmbeddedResource Include="Migrations\201510202107271_ChangePriceToDoubleInOrderedProduct.resx">
       <DependentUpon>201510202107271_ChangePriceToDoubleInOrderedProduct.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Migrations\201510211151202_AddedUniqueConstraintOnUserName.resx">
+      <DependentUpon>201510211151202_AddedUniqueConstraintOnUserName.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Migrations\201510211159196_AddedMinLengthToUserNameAndPassword.resx">
+      <DependentUpon>201510211159196_AddedMinLengthToUserNameAndPassword.cs</DependentUpon>
     </EmbeddedResource>
   </ItemGroup>
   <PropertyGroup>
