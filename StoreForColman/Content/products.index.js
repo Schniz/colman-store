@@ -58,7 +58,7 @@
         refreshTable,
         generateRows,
         memoize(fetchData),
-        getFilter
+        ProductFiltering.getFilter
     );
 
     $(loadPage);

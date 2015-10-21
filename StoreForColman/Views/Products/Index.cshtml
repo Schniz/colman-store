@@ -4,30 +4,7 @@
     ViewBag.Title = "מוצרים";
 }
 
-<form class="form-inline text-center">
-    <label for="manufactors-filter">
-        בחר יצרן
-    </label>
-    <select id="manufactors-filter">
-            <option data-is-all="true" selected="selected">כל היצרנים</option>
-        @foreach (string manufactorName in ViewBag.Manufactors)
-        {
-            <option value="@manufactorName">
-                @(manufactorName.First().ToString().ToUpper() + manufactorName.Substring(1).ToLower())
-            </option>
-        }
-    </select>
-
-    <label for="maxprice-filter">
-        מחיר מקסימלי בש"ח
-    </label>
-    <input type="number" id="maxprice-filter" placeholder="הכנס מחיר..." />
-    
-    <input type="checkbox" id="available-filter" />
-    <label for="available-filter">
-        קיים במלאי
-    </label>
-</form>
+@Html.Partial("_ProductFiltering")
 
 <table class="table table-striped table-condensed table-hover" id="products-index">
     <tr class="table-head">
@@ -51,5 +28,6 @@
 </table>
 
 @section Scripts {
+<script src="~/Content/products.filtering.js"></script>
 <script src="~/Content/products.index.js"></script>
 }

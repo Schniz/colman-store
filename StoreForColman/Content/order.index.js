@@ -1,6 +1,6 @@
 ﻿(function () {
     var DOM = window.DOM;
-    
+
     var blankRow = DOM.tr(
         DOM.td({ colspan: 5 }, [
             "אין מוצרים ברשימה. ",
@@ -46,21 +46,27 @@
         }, item.Quantity).change(onChange);
     }
 
+    function quantityComponent(item) {
+        return DOM.div({ class: 'input-group' }, [
+            quantityInput(item),
+            removeItemButton(item.ID)
+        ]);
+    }
+
     function generateRows(cartData) {
-        return !cartData.length ? blankRow : cartData.map(function (item) {
-            return DOM.tr([
-                DOM.td(item.ID),
-                DOM.td(item.Name),
-                DOM.td(item.ManufactorName),
-                DOM.td(item.PriceInNIS),
-                DOM.td(
-                    DOM.div({ class: 'input-group'}, [
-                        quantityInput(item),
-                        removeItemButton(item.ID)
-                    ])
-                ).css({ width: '11em' })
-            ]);
-        }).concat(sumRow(cartData));
+        return function(isAdmin) {
+            return !cartData.length ? blankRow : cartData.map(function (item) {
+                return DOM.tr([
+                    DOM.td(item.ID),
+                    DOM.td(item.Name),
+                    DOM.td(item.ManufactorName),
+                    DOM.td(item.PriceInNIS),
+                    DOM.td(
+                        quantityComponent(item)
+                    ).css({ width: '11em' })
+                ]);
+            }).concat(sumRow(cartData));
+        }
     }
 
     function toggleLoad(x) {
@@ -88,9 +94,9 @@
     }
 
     var showSuccessMessage = successGrowl.bind(null, "הצלחנו! זה נשלח בהצלחה");
-    var removeItemFromCart = compose(refreshTable, generateRows, window.removeFromCart, toggleLoad);
-    var changedQuantity = compose(refreshTable, generateRows, window.editFromCart, trace('quantity is'), getQuantityInForm, toggleLoad);
-    var loadPage = compose(refreshTable, trace('rows'), generateRows, window.fetchAndRefreshCart, toggleLoad);
+    var removeItemFromCart = compose(refreshTable, generateRows(false), window.removeFromCart, toggleLoad);
+    var changedQuantity = compose(refreshTable, generateRows(false), window.editFromCart, trace('quantity is'), getQuantityInForm, toggleLoad);
+    var loadPage = compose(refreshTable, trace('rows'), generateRows(false), window.fetchAndRefreshCart, toggleLoad);
     var createOrder = compose(loadPage, trace('after save'), showSuccessMessage, checkForError, sendCreateOrder);
 
     $("#order-index-save-order").click(createOrder);

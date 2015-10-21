@@ -6,46 +6,30 @@
 
 <h2>רשימת המוצרים</h2>
 
-<p>
-    @Html.ActionLink("יצירה", "Create")
-</p>
-<table class="table">
-    <tr>
+@Html.Partial("_ProductFiltering")
+
+<table class="table table-striped table-condensed table-hover" id="products-index">
+    <tr class="table-head">
+        <th>
+            @Html.DisplayNameFor(model => model.ID)
+        </th>
         <th>
             @Html.DisplayNameFor(model => model.Name)
         </th>
         <th>
-            @Html.DisplayNameFor(model => model.PriceInNIS)
+            @Html.DisplayNameFor(model => model.ManufactorName)
         </th>
         <th>
-            @Html.DisplayNameFor(model => model.ManufactorName)
+            @Html.DisplayNameFor(model => model.PriceInNIS)
         </th>
         <th>
             @Html.DisplayNameFor(model => model.AmountInStore)
         </th>
         <th></th>
     </tr>
-
-@foreach (var item in Model) {
-    <tr>
-        <td>
-            @Html.DisplayFor(modelItem => item.Name)
-        </td>
-        <td>
-            @Html.DisplayFor(modelItem => item.PriceInNIS)
-        </td>
-        <td>
-            @Html.DisplayFor(modelItem => item.ManufactorName)
-        </td>
-        <td>
-            @Html.DisplayFor(modelItem => item.AmountInStore)
-        </td>
-        <td>
-            @Html.ActionLink("עריכה", "Edit", new { id=item.ID }) |
-            @Html.ActionLink("פרטים", "Details", new { id=item.ID }) |
-            @Html.ActionLink("מחיקה", "Delete", new { id=item.ID })
-        </td>
-    </tr>
-}
-
 </table>
+
+@section Scripts {
+    <script src="~/Content/products.filtering.js"></script>
+    <script src="~/Content/admin.products.js"></script>
+}
