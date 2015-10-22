@@ -31,27 +31,6 @@
         $("#products-index").append(rows);
     }
 
-    function getManufactorFilter() {
-        var $element = $("#manufactors-filter option:selected");
-        return $element.attr("data-is-all") ? undefined : $element.val();
-    }
-
-    function getMaxPrice() {
-        return $("#maxprice-filter").val() || undefined;
-    }
-
-    function getAvailableFilter() {
-        return $("#available-filter").is(':checked') || undefined;
-    }
-
-    function getFilter() {
-        return {
-            manufactor: getManufactorFilter(),
-            maxPrice: getMaxPrice(),
-            available: getAvailableFilter()
-        };
-    }
-
     // Loading a page is just a composition of all the functions
     // below
     var loadPage = compose(
@@ -62,8 +41,6 @@
     );
 
     $(loadPage);
-    $("#manufactors-filter").change(loadPage);
-    $("#maxprice-filter").keyup(loadPage).change(loadPage);
-    $("#available-filter").change(loadPage);
+    ProductFiltering.onChange(loadPage);
 
 })();

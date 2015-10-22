@@ -20,4 +20,10 @@
             available: getAvailableFilter()
         };
     }
+    
+    ProductFiltering.onChange = function onChange(callback) {
+        $("#manufactors-filter").change(callback);
+        $("#maxprice-filter").keyup(callback).change(callback);
+        $("#available-filter").change(callback);
+    }
 })();
