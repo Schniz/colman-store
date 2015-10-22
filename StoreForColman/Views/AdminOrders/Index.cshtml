@@ -1,0 +1,45 @@
+﻿@model IEnumerable<StoreForColman.Models.Order>
+
+@{
+    ViewBag.Title = "Index";
+}
+
+<h2>Index</h2>
+
+<p>
+    @Html.ActionLink("Create New", "Create")
+</p>
+<table class="table">
+    <tr>
+        <td>
+            משתמש
+        </td>
+        <td>
+            מספר מוצרים בהזמנה
+        </td>
+        <td>
+            זמן יצירה
+        </td>
+        <th></th>
+    </tr>
+
+@foreach (var item in Model) {
+    <tr>
+        <td>
+            @Html.ActionLink(item.User.FullName, "Details", "AdminUsers", new { id = item.User.Id })
+        </td>
+        <td>
+            @item.Products.Sum(product => product.Quantity)
+        </td>
+        <td>
+            @item.CreatedAt
+        </td>
+        <td>
+            @Html.ActionLink("Edit", "Edit", new { id=item.ID }) |
+            @Html.ActionLink("Details", "Details", new { id=item.ID }) |
+            @Html.ActionLink("Delete", "Delete", new { id=item.ID })
+        </td>
+    </tr>
+}
+
+</table>
