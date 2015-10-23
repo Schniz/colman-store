@@ -97,7 +97,7 @@ namespace StoreForColman.Models
         [Required]
         public string Name { get; set; }
 
-        [DisplayName("מחיר בש\"ח")]
+        [DisplayName("מחיר")]
         [Required]
         public double PriceInNIS { get; set; }
 

@@ -1,0 +1,44 @@
+﻿@model StoreForColman.Controllers.ViewStats
+
+@{
+    ViewBag.Title = "סטטיסטיקה";
+}
+
+<h2>סטטיסטיקה</h2>
+
+<table class="table table-condensed table-striped">
+    <tr>
+        <th>
+            חודש
+        </th>
+        <th>
+            מספר הזמנות
+        </th>
+    </tr>
+    @foreach (var monthStats in Model.Monthly)
+    {
+        <tr>
+            <td>@(monthStats.Key)</td>
+            <td>@(monthStats.Count)</td>
+        </tr>
+    }
+</table>
+
+<table class="table table-condensed table-striped">
+    <tr>
+        <th>
+            משתמש
+        </th>
+        <th>
+            מספר הזמנות
+        </th>
+    </tr>
+    @foreach (var monthStats in Model.Users)
+    {
+        <tr>
+            <td>@(monthStats.Key)</td>
+            <td>@(monthStats.Count)</td>
+        </tr>
+    }
+</table>
+

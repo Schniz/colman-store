@@ -173,6 +173,7 @@
     <Compile Include="App_Start\Startup.Auth.cs" />
     <Compile Include="Controllers\AdminController.cs" />
     <Compile Include="Controllers\AdminOrdersController.cs" />
+    <Compile Include="Controllers\AdminStatsController.cs" />
     <Compile Include="Controllers\AdminUsersController.cs" />
     <Compile Include="Controllers\CurrencyController.cs" />
     <Compile Include="Controllers\HomeController.cs" />
@@ -319,6 +320,7 @@
     <Content Include="Views\AdminOrders\Details.cshtml" />
     <Content Include="Views\AdminOrders\Edit.cshtml" />
     <Content Include="Views\AdminOrders\Index.cshtml" />
+    <Content Include="Views\AdminStats\Index.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />

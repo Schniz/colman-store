@@ -45,7 +45,7 @@ function dom(type, attr, children) {
     if (attr) {
         $el.attr(attr);
     }
-    if (children) {
+    if (children !== null && children !== undefined) {
         $el.val(children).append(children);
     }
     return $el;
@@ -79,3 +79,10 @@ function growl(type, text, data) {
 }
 
 var successGrowl = growl.bind(null, "success");
+
+function getJSON(/* arguments */) {
+    var args = Array.prototype.slice.apply(arguments);
+    return new Promise(function (resolve, reject) {
+        $.getJSON.apply($, args).then(resolve).fail(reject);
+    });
+}

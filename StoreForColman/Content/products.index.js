@@ -1,8 +1,8 @@
 ﻿(function () {
     var DOM = window.DOM;
 
-    function fetchData(filtering) {
-        return $.getJSON("/Products/List", filtering);
+    function fetchData(filters) {
+        return getJSON("/Products/List", filters);
     }
 
     function generateAddToCartButton(id) {
@@ -31,11 +31,16 @@
         $("#products-index").append(rows);
     }
 
+    function x() {
+        return Promise.resolve('wat');
+    }
+
     // Loading a page is just a composition of all the functions
     // below
     var loadPage = compose(
         refreshTable,
         generateRows,
+        ProductFiltering.applyCurrency,
         memoize(fetchData),
         ProductFiltering.getFilter
     );

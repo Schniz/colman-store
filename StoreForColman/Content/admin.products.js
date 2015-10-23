@@ -2,7 +2,7 @@
     var DOM = window.DOM;
 
     function fetchData(filter) {
-        return $.getJSON("/Products/List", filter);
+        return getJSON("/Products/List", filter);
     }
 
     function generateRows(data) {
@@ -24,7 +24,7 @@
         return rows;
     }
 
-	var loadPage = compose(trace('this is the filter'), refreshTable, generateRows, memoize(fetchData), ProductFiltering.getFilter);
+	var loadPage = compose(refreshTable, generateRows, ProductFiltering.applyCurrency, memoize(fetchData), ProductFiltering.getFilter);
 	ProductFiltering.onChange(loadPage);
 	$(loadPage);
 })();
